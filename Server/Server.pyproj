@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>0488796a-cd45-4c39-a498-b1e235800cdb</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>main.py</StartupFile>
+    <StartupFile>utility\DataProcessing.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -40,14 +40,18 @@
     <Compile Include="ServerThread.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="tf\RNN.py">
+    <Compile Include="nn\RNN.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utility\DataProcessing.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="db\" />
     <Folder Include="design\" />
-    <Folder Include="tf\" />
+    <Folder Include="utility\" />
+    <Folder Include="nn\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
