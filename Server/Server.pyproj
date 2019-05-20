@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>0488796a-cd45-4c39-a498-b1e235800cdb</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>utility\DataProcessing.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,7 +24,7 @@
     <Compile Include="db\Mysql.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="design\SingletonPattern.py">
+    <Compile Include="pattern\SingletonPattern.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Header.py">
@@ -40,18 +40,14 @@
     <Compile Include="ServerThread.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="nn\RNN.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="utility\DataProcessing.py">
+    <Compile Include="utility\TempClient.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="db\" />
-    <Folder Include="design\" />
+    <Folder Include="pattern\" />
     <Folder Include="utility\" />
-    <Folder Include="nn\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
