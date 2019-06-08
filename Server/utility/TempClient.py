@@ -25,4 +25,7 @@ sock.send(sbuff)
  
 rbuff = sock.recv(1024)
 mm = str(rbuff, encoding='euc-kr')
-print('수신 : {0}'.format(mm))
+header = mm.split("|", 1)
+mm = mm.split("|")
+for m in mm:
+    print('수신 : {0}'.format(m))

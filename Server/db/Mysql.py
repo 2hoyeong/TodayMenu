@@ -1,5 +1,5 @@
 import pymysql
-from design.SingletonPattern import SingletonInstance
+from pattern.SingletonPattern import SingletonInstance
 
 class Mysql(SingletonInstance):
     def __init__(self):

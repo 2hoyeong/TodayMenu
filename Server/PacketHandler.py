@@ -1,6 +1,7 @@
 from Header import ReceivePacketHeader
 from Header import SendPacketHeader
 from db.Mysql import Mysql
+from Recommandation import Recommandation
 
 class PacketHandler:
     def switch(self, conn, header, data):
@@ -12,6 +13,8 @@ class PacketHandler:
         rows = Mysql.getInstance().execute("select * from `accounts` where `id` = '"+ id + "' and `pw` = '" + pw + "'")
         if rows:
             conn.send(SendPacketHeader.LoginOK, "로그인이 완료되었습니다")
+            conn.id = id
+            conn.key = int(rows[0][0])
         else:
             conn.send(SendPacketHeader.LoginNO, "로그인에 실패했습니다")
 
@@ -26,11 +29,13 @@ class PacketHandler:
             conn.send(SendPacketHeader.RegistOK, "회원가입이 완료되었습니다!")
 
     def RequestListSort(self, conn, data):
+        if not conn.id:
+            print("비정상적인 접근 : " + data)
+            return
+
         Restaurant = list()
         for item in data.split("|"):
             Restaurant.append(item)
-        print(Restaurant)
         if Restaurant:
-            print("추천시스템!!!@!@!@!#@#!@$!@#!@")
-            conn.send(SendPacketHeader.ListSortOK, ''.join(Restaurant))
-            
+            result = Recommandation().requestRecommandation(conn.key, Restaurant)
+            conn.send(SendPacketHeader.ListSortOK, '|'.join(result))
