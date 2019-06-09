@@ -39,3 +39,10 @@ class PacketHandler:
         if Restaurant:
             result = Recommandation().requestRecommandation(conn.key, Restaurant)
             conn.send(SendPacketHeader.ListSortOK, '|'.join(result))
+
+    def AddPaymentData(self, conn, data):
+        Restaurant = list()
+        for item in data.split("|"):
+            Restaurant.append(item)
+        if Restaurant:
+            Recommandation().addUserTypeData(conn.key, Restaurant)

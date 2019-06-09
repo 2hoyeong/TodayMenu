@@ -5,6 +5,7 @@ class ReceivePacketHeader(enum.Enum):
     LoginRequest = 1
     RegistAccount = 2
     RequestListSort = 3
+    AddPaymentData = 4
     
 
 @enum.unique
@@ -14,3 +15,4 @@ class SendPacketHeader(enum.Enum):
     RegistOK = 3
     RegistNO = 4
     ListSortOK = 5
+    ListSortNO = 6
