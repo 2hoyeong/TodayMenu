@@ -57,12 +57,7 @@ class Recommandation():
     def getRestaurantType(self, data):
         result = list()
         for item in data:
-            rule = re.compile(r"\s[\w]+점$")
-            matched = rule.search(item)
-            if matched:
-                matchitem = item.replace(matched.group(0), "")
-            else:
-                matchitem = item
+            matchitem = self.removeBranch(item)
 
             category = Mysql.getInstance().execute("select `category`, `name` from `restaurant` where `name` LIKE '"+ str(matchitem) + "%';")
             if category:
@@ -75,4 +70,18 @@ class Recommandation():
 
     def addUserTypeData(self, userkey, data): 
         for item in data:
-            Mysql.getInstance().execute("INSERT INTO `paymentdata` VALUES("+ str(userkey) +", '"+ str(item[0]) +"', "+ str(item[1]) +");")
+            item = self.removeBranch(item)
+            category = Mysql.getInstance().execute("SELECT `category` from `restaurant` where `name` LIKE '"+ str(item) +"%';")
+            if category:
+                Mysql.getInstance().execute("INSERT INTO `paymentdata` VALUES("+ str(userkey) +", '"+ str(item) +"', "+ str(category[0][0]) +");")
+
+
+    def removeBranch(self, string):
+        rule = re.compile(r"\s[\w]+점$")
+        matched = rule.search(string)
+        if matched:
+            matchitem = string.replace(matched.group(0), "")
+        else:
+            matchitem = string
+
+        return matchitem
