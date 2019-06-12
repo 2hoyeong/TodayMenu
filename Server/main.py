@@ -4,7 +4,7 @@ import ServerThread
 from db.Mysql import Mysql
 
 # SERVER SETTING
-hostip = '127.0.0.1'
+hostip = '172.30.1.33'
 port = 5882
 # SETTING END
 

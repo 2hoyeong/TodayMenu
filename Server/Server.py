@@ -13,17 +13,25 @@ class Server(threading.Thread):
 
     def run(self):
         while True:
-            data = self.conn.recv(1024).decode('euc-kr')
+            data = self.conn.recv(1024).decode('utf-8')
             
             if not data:
                 print("CONNECTION CLOSE")
                 break;
 
-            header, data = data.split("|", 1)
-            PacketHandler().switch(self, header, data)
+            data = data[:-1]
+
+            try:
+                header, data = data.split("|", 1)
+                PacketHandler().switch(self, header, data)
+            except Exception as err:
+                print(data)
+                print(err)
 
     def send(self, header, data):
-        message = bytes((str(header) + "|" + data), 'euc-kr')
+        data += "\n";
+        message = bytes((str(header.value) + "|" + data), 'utf-8')
+        print(message[:-1].decode('utf-8'))
         self.conn.send(message)
 
     def setId(self, id):
